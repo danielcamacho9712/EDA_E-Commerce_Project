@@ -23,7 +23,7 @@ This is a e-commerce dataset, from sales across several cities in Turkiye. This 
 
 ## 2. Importing Libraries 
 <p align="justify">
-We will be working in this dataset with 3 libraries, </strong>pandas</strong> for tabular data managment, <strong>matplotlib.pyplot</strong> and <strong>seaborn<strong> for visualization:
+We will be working in this dataset with 3 libraries, </strong>pandas</strong> for tabular data managment, <strong>matplotlib.pyplot</strong> and <strong>seaborn</strong> for visualization:
 </p>
 
 ```python
@@ -81,6 +81,16 @@ We can see that we have in the dataset:
 - 1 <strong>boolean</strong> column </br>
 
 Also we can notice that we haven't <strong>NaN values</strong> in the dataset, that can be also confirmed by looking directly into the <strong>isna().sum()</strong> output.
+```python
+data_sales.isna().sum()
+```
+<div align="center">
+  <img src="Images/isna.png" style="max-width: 100%; height: auto;">
+</div>
+<p><strong>Figure 3.</strong> Isna method output with 0 NaN values  
+
+</details>
+
 
 
 <p align="justify">
