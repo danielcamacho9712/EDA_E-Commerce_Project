@@ -54,9 +54,9 @@ data_sales.head()
 
 </details>
 
-## 3. Exploratory Data Analysis
+## 4. Exploratory Data Analysis
 
-### 3.1 Understanding the Dataset
+### 4.1 Understanding the Dataset
 
 We first used <strong>shape</strong> to know the size of the dataset, then we use the info() method to know the column types, and if there was any null-values in the dataset:
 ```python
@@ -81,6 +81,9 @@ We can see that we have in the dataset:
 - 1 <strong>boolean</strong> column </br>
 
 Also we can notice that we haven't <strong>NaN values</strong> in the dataset, that can be also confirmed by looking directly into the <strong>isna().sum()</strong> output.
+
+### 4.2 Null values, outliers and duplicates
+
 ```python
 data_sales.isna().sum()
 ```
@@ -91,7 +94,37 @@ data_sales.isna().sum()
 
 </details>
 
+<p align="justify">
+After the confirmation of the absence of <strong>null values</strong> in the dataset, we looked for <strong>outliers</strong> and <strong>duplicates</strong> in the dataset. For the first one, we built histograms with all the numerical columns in the dataset, the advantage of using this method is that allow us quickly to detect outliers in the dataset: 
+```python
+data_sales.hist(figsize=(12, 8), bins=30)
+```
+</p>
 
+<div align="center">
+  <img src="Images/isna.png" style="max-width: 100%; height: auto;">
+</div>
+<p><strong>Figure 4.</strong> Histograms of numerical columns to look for outliers
+
+</details>
+
+Then we looked for duplicates in the dataset: 
+```python
+data_sales.duplicated().sum()
+```
+<details>
+  <summary>Click to see output of <strong>duplicated().sum()</strong> </summary>
+
+<div align="center">
+  <img src="Images/duplicates.png" style="max-width: 100%; height: auto;">
+</div>
+<p><strong>Figure 5.</strong> Duplicates output, showing the absence of duplicate entries in the dataset
+
+</details>
+
+- If we analyse the histograms, all the numerical features behave inside of the normal patterns, so we don't have any obvious outlier in this dataset nor duplicates. 
+
+### 4.3 Features Correlation
 
 <p align="justify">
 There wasn't nan values present in the dataset as was confirmed by running <strong>isna().sum()</strong>. After this we explore the data, to see if all the values were in a logical range:
