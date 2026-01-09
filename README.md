@@ -48,7 +48,7 @@ data_sales.head()
   <summary>Click to see output of <strong>head()</strong> </summary>
 
 <div align="center">
-  <img src="Images/head.png" style="max-width: 100%; height: 100%;">
+  <img src="Images/head.png" style="max-height: 600px; width: auto;">
 </div>
 <p><strong>Figure 1.</strong> First 5 rows of the dataset
 
