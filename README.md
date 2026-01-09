@@ -102,16 +102,16 @@ data_sales.isna().sum()
 <p align="justify">
 After the confirmation of the absence of <strong>null values</strong> in the dataset, we looked for <strong>outliers</strong> and <strong>duplicates</strong> in the dataset. For the first one, we built histograms with all the numerical columns in the dataset, the advantage of using this method is that allow us quickly to detect outliers in the dataset: 
 </p>
+
 ```python
 data_sales.hist(figsize=(12, 8), bins=30)
+
 ```
 
 <div align="center">
   <img src="Images/hist_outliers.png" style="max-width: 100%; height: auto;">
 </div>
 <p><strong>Figure 4.</strong> Histograms of numerical columns to look for outliers
-
-</details>
 
 Then we looked for duplicates in the dataset: 
 ```python
