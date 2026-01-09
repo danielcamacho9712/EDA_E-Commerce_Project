@@ -58,7 +58,7 @@ data_sales.head()
 
 ### 3.1 Understanding the Dataset
 
-We first used <strong>shape<\strong> to know the size of the dataset, then we use the info() method to know the column types, and if there was any null-values in the dataset:
+We first used <strong>shape</strong> to know the size of the dataset, then we use the info() method to know the column types, and if there was any null-values in the dataset:
 ```python
 data_sales.info()
 ```
@@ -66,11 +66,21 @@ data_sales.info()
 <div align="center">
   <img src="Images/info.png" style="max-width: 100%; height: auto;">
 </div>
-<p><strong>Figure 1.</strong> First 5 rows of the dataset
+<p><strong>Figure 2.</strong> Info method output with the dtypes of each column
 
 </details>
 
+<p align="justify">
+We can see that we have in the dataset:
+</p>
 
+- 8 <strong>numerical</strong> columns </br>
+
+- 8 <strong>object</strong> type columns </br>
+
+- 1 <strong>boolean</strong> column </br>
+
+Also we can notice that we haven't <strong>NaN values</strong> in the dataset, that can be also confirmed by looking directly into the <strong>isna().sum()</strong> output.
 
 
 <p align="justify">
