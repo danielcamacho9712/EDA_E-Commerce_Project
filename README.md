@@ -10,7 +10,7 @@ This is a e-commerce dataset, from sales across several cities in Turkiye. This 
 <strong>1-</strong> Import libraries </br>
 <strong>2-</strong> Import the dataset </br>
 <strong>3-</strong> Exploratory Data Analysis </br>
-<strong>3.1-</strong> First we are going to focus in unerstand the dataset </br>
+<strong>3.1-</strong> First we are going to focus in understand the dataset </br>
 <strong>3.2-</strong> We will look for NaN values, duplicates and outliers in the dataset </br>
 <strong>3.3-</strong> Then we will analyse the correlation among the features in the dataset </br>
 <strong>3.4-</strong> Finally we are going to answer some question with financial interest like: </br>
@@ -26,11 +26,29 @@ This is a e-commerce dataset, from sales across several cities in Turkiye. This 
 We will be working in this dataset with 3 libraries, </strong>pandas</strong> for tabular data managment, <strong>matplotlib.pyplot</strong> and <strong>seaborn<strong> for visualization:
 </p>
 
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Plot style that I like
+plt.style.use('seaborn-v0_8-whitegrid')
+```
+
+## 3. Importing Dataset
+In this step, we are going to use pandas to import the data, and use head() to explore the first five rows of the data:
+```python
+file_path = './data/ecommerce_customer_behavior_dataset_v2.csv'
+
+data_sales = pd.read_csv(file_path)
+data_sales.head()
+```
+
 <details>
-  <summary>Click to see output of the <strong>isna().sum()</strong> </summary>
+  <summary>Click to see output of <strong>head()</strong> </summary>
 
 <div align="center">
-  <img src="Images/is_nan.png" alt="Screenshot" width="200">
+  <img src="Images/head.png" alt="Screenshot" width="200">
 </div>
 <p><strong>Figure 1.</strong> Every Nan values in the dataset
 
