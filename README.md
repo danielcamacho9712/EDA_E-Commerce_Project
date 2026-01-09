@@ -63,6 +63,8 @@ We first used <strong>shape</strong> to know the size of the dataset, then we us
 data_sales.info()
 ```
 
+<details>
+  <summary>Click to see output of <strong>info()</strong> </summary>
 <div align="center">
   <img src="Images/info.png" style="max-width: 100%; height: auto;">
 </div>
@@ -87,6 +89,9 @@ Also we can notice that we haven't <strong>NaN values</strong> in the dataset, t
 ```python
 data_sales.isna().sum()
 ```
+
+<details>
+  <summary>Click to see output of <strong>isna().sum()</strong> </summary>
 <div align="center">
   <img src="Images/isna.png" style="max-width: 100%; height: auto;">
 </div>
@@ -102,7 +107,7 @@ data_sales.hist(figsize=(12, 8), bins=30)
 </p>
 
 <div align="center">
-  <img src="Images/isna.png" style="max-width: 100%; height: auto;">
+  <img src="Images/hist_outliers.png" style="max-width: 100%; height: auto;">
 </div>
 <p><strong>Figure 4.</strong> Histograms of numerical columns to look for outliers
 
