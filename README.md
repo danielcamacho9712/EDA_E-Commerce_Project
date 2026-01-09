@@ -50,9 +50,28 @@ data_sales.head()
 <div align="center">
   <img src="Images/head.png" style="max-width: 100%; height: auto;">
 </div>
-<p><strong>Figure 1.</strong> Every Nan values in the dataset
+<p><strong>Figure 1.</strong> First 5 rows of the dataset
 
 </details>
+
+## 3. Exploratory Data Analysis
+
+### 3.1 Understanding the Dataset
+
+We first used <strong>shape<\strong> to know the size of the dataset, then we use the info() method to know the column types, and if there was any null-values in the dataset:
+```python
+data_sales.info()
+```
+
+<div align="center">
+  <img src="Images/info.png" style="max-width: 100%; height: auto;">
+</div>
+<p><strong>Figure 1.</strong> First 5 rows of the dataset
+
+</details>
+
+
+
 
 <p align="justify">
 There wasn't nan values present in the dataset as was confirmed by running <strong>isna().sum()</strong>. After this we explore the data, to see if all the values were in a logical range:
