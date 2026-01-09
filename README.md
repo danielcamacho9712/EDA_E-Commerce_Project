@@ -5,25 +5,25 @@ You can find the dataset:
 
 ## 1. Introduction
 <p align="justify">
-This is a e-commerce dataset, from sales across several cities in Turkiye. This dataset will be employed to make an **Exploratory Data Analysis**, during this project we will:
+This is a e-commerce dataset, from sales across several cities in Turkiye. This dataset will be employed to make an <strong>Exploratory Data Analysis<strong>, during this project we will:
 </p>
-1- Import libraries
-2- Import the dataset
-3- Exploratory Data Analysis
-3.1- First we are going to focus in unerstand the dataset
-3.2- We will look for NaN values, duplicates and outliers in the dataset
-3.3- Then we will analyse the correlation among the features in the dataset
-3.4- Finally we are going to answer some question with financial interest like:
-3.4.1- Which cities generate the highest total sales in the Beauty and Fashion categories?
-3.4.2- How do discounts affect the quantity of items purchased?
-3.4.3- What are the most popular payment methods by age group?
-3.4.4- How does device type influence user engagement, measured by pages viewed and session duration?
-3.4.5- Which cities have the lowest average delivery time (most efficient delivery)?
+<strong>1-<strong> Import libraries </br>
+<strong>2-<strong> Import the dataset </br>
+<strong>3-<strong> Exploratory Data Analysis </br>
+<strong>3.1-<strong> First we are going to focus in unerstand the dataset </br>
+<strong>3.2-<strong> We will look for NaN values, duplicates and outliers in the dataset </br>
+<strong>3.3-<strong> Then we will analyse the correlation among the features in the dataset </br>
+<strong>3.4-<strong> Finally we are going to answer some question with financial interest like: </br>
+<strong>3.4.1-<strong> Which cities generate the highest total sales in the Beauty and Fashion categories? </br>
+<strong>3.4.2-<strong> How do discounts affect the quantity of items purchased? </br>
+<strong>3.4.3-<strong> What are the most popular payment methods by age group? </br>
+<strong>3.4.4-<strong> How does device type influence user engagement, measured by pages viewed and session duration? </br>
+<strong>3.4.5-<strong> Which cities have the lowest average delivery time (most efficient delivery)? </br>
 
 
 ## 2. Importing Libraries 
 <p align="justify">
-We will be working in this dataset with 3 libraries, **pandas** for tabular data managment, **matplotlib.pyplot** and **seaborn** for visualization:
+We will be working in this dataset with 3 libraries, <strong>pandas<strong> for tabular data managment, <strong>matplotlib.pyplot<strong> and <strong>seaborn<strong> for visualization:
 </p>
 
 <details>
