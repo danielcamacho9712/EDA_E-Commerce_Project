@@ -48,7 +48,7 @@ data_sales.head()
   <summary>Click to see output of <strong>head()</strong> </summary>
 
 <div align="center">
-  <img src="Images/head.png" alt="Screenshot" width="200">
+  <img src="Images/head.png" alt="Screenshot">
 </div>
 <p><strong>Figure 1.</strong> Every Nan values in the dataset
 
