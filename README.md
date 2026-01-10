@@ -73,8 +73,8 @@ data_sales.info()
 </details>
 
 <p align="justify">
-We can see that we have in the dataset:
-</p>
+We can see that we have in the dataset: </br>
+
 
 - 8 <strong>numerical</strong> columns </br>
 
@@ -83,6 +83,8 @@ We can see that we have in the dataset:
 - 1 <strong>boolean</strong> column </br>
 
 Also we can notice that we haven't <strong>NaN values</strong> in the dataset, that can be also confirmed by looking directly into the <strong>isna().sum()</strong> output.
+
+</p>
 
 ### 4.2 Null values, outliers and duplicates
 
@@ -127,18 +129,45 @@ data_sales.duplicated().sum()
 
 </details>
 
+<p align="justify">
 - If we analyse the histograms, all the numerical features behave inside of the normal patterns, so we don't have any obvious outlier in this dataset nor duplicates. 
+</p>
 
 ### 4.3 Features Correlation
 
 <p align="justify">
-There wasn't nan values present in the dataset as was confirmed by running <strong>isna().sum()</strong>. After this we explore the data, to see if all the values were in a logical range:
+Main goal here is to analyse correlation among features using several kind of graphs, like <strong>heatmaps</strong>, <strong>barcharts</strong> and finally a <strong>linechart</strong> for sales
+evolution over time:
 </p>
 
+```python
+num_variables_corr = ['Unit_Price', 'Quantity', 'Discount_Amount', 'Customer_Rating', 'Year', 'Month']
+corr_matrix = data_sales[num_variables_corr].corr()
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr_matrix, 
+            annot=True, 
+            fmt=".2f")
+
+plt.title('Correlation Matrix of Some Numerical Variables', fontsize=16)
+plt.show()
+```
+
 <div align="center">
-  <img src="Images/data_exploration.png" alt="Screenshot1">
+  <img src="Images/feature_corr.png" alt="Screenshot1">
 </div>
-<p><strong>Figure 2.</strong> Dataset column's histograms
+<p><strong>Figure 6.</strong> Some features Pearson's correlation heatmap
+
+<p align="justify">
+Since we are using a Pearson correlation matrix, the analysis captures linear relationships between numerical variables only. Based on the results, the following insights can be drawn: </br>
+
+- There is a strong positive correlation between Unit Price and Discount Amount, as well as between Discount Amount and Quantity sold, suggesting that higher-priced items tend to receive larger discounts and that discounts are associated with increased sales volume. </br>
+
+- Although the heatmap shows no correlation between Unit Price and Quantity, this does not imply the absence of a relationship. Rather, it indicates that there is no strong linear relationship between these variables. </br>
+
+- The correlation matrix also suggests no significant linear relationship between Discount Amount and Month, indicating that discounts do not follow a consistent seasonal pattern across the year. </br>
+
+</p>
 
 <p align="justify">
 There wasn't any anomaly present in the features or the output classes in the dataset.
