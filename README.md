@@ -1,4 +1,4 @@
-# Exploratory Data AnalysisProject
+# Exploratory Data Analysis Project
 
 You can find the dataset:
 *https://www.kaggle.com/datasets/umuttuygurr/e-commerce-customer-behavior-and-sales-analysis-tr*
@@ -169,139 +169,124 @@ Since we are using a Pearson correlation matrix, the analysis captures linear re
 
 </p>
 
-<p align="justify">
-There wasn't any anomaly present in the features or the output classes in the dataset.
-</p>
+```python
+product_total_sales = data_sales.groupby('Product_Category')['Total_Amount'].sum().sort_values(ascending=False)
 
-<p align="justify">
-We are addressing a classification problem, the desired output labels are bad quality wine that will be represented with a 0 value and good quality wine 
-that will be represented with a 1 value. Input features had different scales:
-</p>
+plt.figure(figsize=(12, 6))
 
-1- Fixed acidity: <strong> 0<x<16 </strong> </br>
-2- Volatile acidity: <strong> 0<x<1.6 </strong> </br>
-3- Citric acid concentration: <strong> 0<x<1 </strong> </br>
-4- Residual sugar: <strong> 0<x<16 </strong> </br>
-5- Amount of chlorides: <strong> 0<x<0.6 </strong> </br>
-6- Total amount of sulfur dioxide: <strong> 0<x<75 </strong> </br>
-7- Solution density: <strong> 0<x<300 </strong> </br>
-8- Solution pH: <strong> 2.6<x<4.2 </strong> </br>
-9- Amont of sulphates: <strong> 0.25<x<2 </strong> </br>
-10- Alcohol grade: <strong> 8<x<15.2 </strong> </br>
+sns.barplot(
+    x=product_total_sales.index,
+    y=product_total_sales.values,
+    palette='viridis',
+    hue=product_total_sales.index,
+    legend=False
+)
 
-<p align="justify">
-For this reason the features  <strong>[fixed acidity, residual sugar, free sulfur dioxide, total sulfur dioxide, alcohol]</strong> were scaled using min-max normalization, after this the original columns (without scaling) were dropped, because they were not needed for the model training.
-</p>
-
-## 3. Benchamark model
-
-<p align="justify">
-A <strong>DecisionTreeClassifier</strong> was the model selected to train using the dataset. We import the model from the ML-library sklearn, after this we split the data into training and testing set, we set the size of the testing set using the hyperparameter <strong>test_size=0.2</strong>. The model was trained, accuracy metrics and a confusion matrix were used to determine the model's perfomance. The accuracy of the benchmark model was <strong>accuracy=0.725</strong> and the confusion matrix is presented in the following figure:
-</p>
+plt.xlabel('Product Category', fontsize=14)
+plt.ylabel('Total Sales Amount', fontsize=14)
+plt.title('Total Sales by Product Category', fontsize=16)
+plt.show()
+```
 
 <div align="center">
-  <img src="Images/benchmark_performance.png" alt="Screenshot2">
+  <img src="Images/sales_per_category.png" alt="Screenshot1">
 </div>
-<p><strong>Figure 3.</strong> Benchmark Model Performance
+<p><strong>Figure 7.</strong> Total sales distribution per category
 
 <p align="justify">
-The DecisionTreeClassifier performed well in solving this classification problem. However, its performance can be further enhanced through feature engineering and by experimenting with other models that may better fit our data. 
-</p>
-
-## 4. Feature Engineering
-
-<p align="justify">
-A correlation feature matrix was used to analyze the relationship between input features and output classes. A threshold of 0.2 was set, and all features with a correlation above this value with wine quality were selected for retraining the model. 
-</p>
-
-<div align="center">
-  <img src="Images/features_selection.png" alt="Screenshot3">
-</div>
-<p><strong>Figure 4.</strong> Correlation Feature Matrix 
-
-<p align="justify">
-After this selection process, the input features selected were <strong>[volatile acidity, sulphates, total sulfur dioxide_scaled, alcohol_scaled]</strong>.
-</p>
-
-## 5. Model Training 
-
-<p align="justify">
-In this section three models were selected to train and compare their perfomance based in <strong>accuracy, precision, recall and f1-score metrics</strong>. The models selected were <strong> Decision Tree, Random Forest and Gradient Boosting </strong>. In the next figure are shown the confusion matrix for these three models:
-</p>
-
-<div align="center">
-  <img src="Images/3_models.png" alt="Screenshot4">
-</div>
-<p><strong>Figure 5.</strong> Confusion Matrices for the three selected models.
-
-<p align="justify">
-In <strong>Table 1</strong>, it can be observed that the best-performing model was Random Forest.
-</p>
-
-|Metrics   |Decision Tree|Random Forest|Gradient Boosting|
-|----------|-------------|-------------|-----------------|
-|Accuracy  |0.737500     |0.809375     |0.734375         |
-|Precision |0.787879		 |0.847059     |0.770115         |
-|Recall    |0.726257		 |0.804469     |0.748603         |
-|F1-score  |0.755814		 |0.825215     |0.759207         |
-
-<p><strong>Table 1.</strong> Three models metrics comparision
-
-## 6. Random Forest Hyperparameters Tuning 
-
-<p align="justify">
-A grid was made with several hyperparameter of the model and then used the RandomizedSearchCV function inside of sklearn library to found the best set of hyperparameters regarding to accuracy metrics. 
+- The graph shows that customers spend the most on electronics, while books account for the lowest total sales.
 </p>
 
 ```python
-# Number of trees in the forest
-n_estimators = [int(x) for x in np.linspace(start=100, stop=200, num=11)]
-# How to compute the quality of split
-criterion = ['gini', 'entropy']
-# Number of features to consider at every split
-max_features = ['sqrt', 'log2']
-# Maximum number of levels in tree
-max_depth = [2, 4, 8, 10, 12]
-max_depth.append(None)
-# Minimum number of samples required to split a node
-min_samples_split = [2, 4, 8, 16, 32]
-# Minimum number of samples required at each leaf node
-min_samples_leaf = [1, 2, 4, 10, 20]
-# Method of selecting samples for training each tree
-bootstrap = [True, False]
+sales_per_month = data_sales.groupby(['Month', 'Year'])['Total_Amount'].sum().unstack()
 
-random_grid = {'n_estimators': n_estimators,
-               'criterion': criterion,
-               'max_features': max_features,
-               'max_depth': max_depth,
-               'min_samples_split': min_samples_split, 
-               'min_samples_leaf': min_samples_leaf, 
-               'bootstrap': bootstrap
-               }
+sales_per_month = (
+    data_sales
+    .query('Year == 2023')
+    .groupby('Month')['Total_Amount']
+    .sum()
+)
 
-from sklearn.model_selection import RandomizedSearchCV
+plt.figure(figsize=(10, 6))
+sns.lineplot(
+    x=sales_per_month.index,
+    y=sales_per_month.values,
+    marker='o', 
+    color='teal',
+)
 
-rf = RandomForestClassifier(random_state=42)
+month_dic = {
+    1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr',
+    5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug',
+    9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'
+}
 
-# Random search
-random_search = RandomizedSearchCV(rf, param_distributions=random_grid, n_iter=20, cv=5, n_jobs=-1, scoring='accuracy', random_state=42)
-random_search.fit(X_train, y_train)
-
-forest_opt = RandomForestClassifier(**random_search.best_params_)
-
+plt.xlabel('Month', fontsize=14, labelpad=10)
+plt.ylabel('Total Sales Amount', fontsize=14, labelpad=10)
+plt.title('Total Sales per Month in 2023', fontsize=16)
+plt.xticks(sales_per_month.index, labels=[month_dic[m] for m in sales_per_month.index])
+plt.show()
 ```
 
-|Metrics   |Random Forest optimized|Random Forest|
-|----------|-----------------------|-------------|
-|Accuracy  |0.790625               |0.809375     |
-|Precision |0.829412		       |0.847059     |
-|Recall    |0.787709		       |0.804469     |
-|F1-score  |0.808023		       |0.825215     |
+<div align="center">
+  <img src="Images/sales_time_evo.png" alt="Screenshot1">
+</div>
+<p><strong>Figure 8.</strong> Total sales time evolution in the year 2023
 
-<p><strong>Table 2.</strong> Optimized and non-optimized hyperparameters Random Forest performance
+<p align="justify">
 
-## 6. Conclusions
- 
- <p align="justify">
- The model's performance is already strong even before hyperparameter tuning, and further tuning does not seem to enhance it. However, there are two possible approaches to potentially improve its performance. First, increasing the <strong>n_iter</strong> hyperparameter in the <strong>RandomizedSearchCV</strong> function may help explore a wider range of parameter combinations. Second, using <strong> GridSearchCV </strong>could identify the optimal hyperparameter combination, with the inconvinient that it is computationally more expensive.
+Insights drawn from the graph: </br>
+
+- Sales reach their highest level in December, which may be driven by holiday-related spending, such as Christmas promotions and gift purchases. </br>
+
+- A sharp decline in January follows the December peak, potentially reflecting post-holiday budget adjustments and reduced consumer spending. </br>
+
+- After the early-year slowdown, sales gradually increase toward the beginning of the summer period, possibly influenced by seasonal demand and vacation-related purchases.</br>
+
+</p>
+
+### 4.4 Responding Initial Questions
+
+#### 4.4.1 Which cities generate the highest total sales in the Beauty and Fashion categories? 
+
+<p align="justify">
+
+For answering this question first, we are going to filter the data using a query(), selection just the Fashion and Beauty categories and the will use  groupby().sum(), to calculate the total amount of sales in both categories:
+
+</p>
+
+```python
+city_beauty_fashion = (data_sales.query('Product_Category == "Beauty" or Product_Category == "Fashion"')
+                       .groupby('City')['Total_Amount']
+                       .sum()
+                       .sort_values(ascending=False)
+                       )
+
+plt.figure(figsize=(10, 8))
+
+sns.barplot(
+    x=city_beauty_fashion.index,
+    y=city_beauty_fashion.values,
+    palette='magma',
+    hue=city_beauty_fashion.index,
+    legend=False
+)
+
+plt.xlabel('City', fontsize=14, labelpad=10)
+plt.ylabel('Total Sales Amount', fontsize=14, labelpad=10)
+plt.title('Total Sales in Beauty and Fashion by City', fontsize=16)
+plt.show()
+```
+
+<div align="center">
+  <img src="Images/question1.png" alt="Screenshot1">
+</div>
+<p><strong>Figure 9.</strong> Top cities in Beauty and Fashion purchases
+
+<p align="justify">
+
+- Istanbul records the highest sales in beauty and fashion, likely influenced by its population size and market scale. </br>
+
+- Although Adana has a smaller population than Antalya and Konya, it exhibits comparatively higher fashion and beauty spending, indicating potential differences in consumer preferences or income distribution. </br>
+
 </p>
