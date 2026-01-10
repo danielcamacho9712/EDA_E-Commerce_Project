@@ -5,21 +5,21 @@ You can find the dataset:
 
 ## 1. Introduction
 <p align="justify">
-This is a e-commerce dataset, from sales across several cities in Turkiye. This dataset will be employed to make an <strong>Exploratory Data Analysis</strong>, during this project we will:
+This project uses an e-commerce dataset containing sales data from several cities in Türkiye. The dataset is employed to perform an <strong>Exploratory Data Analysis (EDA)</strong>. Throughout this project, we will:
 </p>
-<strong>1-</strong> Import libraries </br>
-<strong>2-</strong> Import the dataset </br>
-<strong>3-</strong> Exploratory Data Analysis </br>
-<strong>3.1-</strong> First we are going to focus in understand the dataset </br>
-<strong>3.2-</strong> We will look for NaN values, duplicates and outliers in the dataset </br>
-<strong>3.3-</strong> Then we will analyse the correlation among the features in the dataset </br>
-<strong>3.4-</strong> Finally we are going to answer some question with financial interest like: </br>
-<strong>3.4.1-</strong> Which cities generate the highest total sales in the Beauty and Fashion categories? </br>
-<strong>3.4.2-</strong> How do discounts affect the quantity of items purchased? </br>
-<strong>3.4.3-</strong> What are the most popular payment methods by age group? </br>
-<strong>3.4.4-</strong> How does device type influence user engagement, measured by pages viewed and session duration? </br>
-<strong>3.4.5-</strong> Which cities have the lowest average delivery time (most efficient delivery)? </br>
-<strong>4-</strong> Take home notes </br>
+<strong>1-</strong> Import the required libraries <br>
+<strong>2-</strong> Load the dataset <br>
+<strong>3-</strong> Perform Exploratory Data Analysis <br>
+<strong>3.1-</strong> Understand the structure and content of the dataset <br>
+<strong>3.2-</strong> Identify NaN values, duplicates, and outliers <br>
+<strong>3.3-</strong> Analyze correlations among the dataset features <br>
+<strong>3.4-</strong> Answer business-oriented questions of financial interest, such as: <br>
+<strong>3.4.1-</strong> Which cities generate the highest total sales in the Beauty and Fashion categories? <br>
+<strong>3.4.2-</strong> How do discounts affect the quantity of items purchased? <br>
+<strong>3.4.3-</strong> What are the most popular payment methods by age group? <br>
+<strong>3.4.4-</strong> How does device type influence user engagement, measured by pages viewed and session duration? <br>
+<strong>3.4.5-</strong> Which cities have the lowest average delivery time (most efficient delivery)? <br>
+<strong>4-</strong> Key takeaways <br>
 
 
 ## 2. Importing Libraries 
@@ -59,7 +59,8 @@ data_sales.head()
 
 ### 4.1 Understanding the Dataset
 
-We first used <strong>shape</strong> to know the size of the dataset, then we use the info() method to know the column types, and if there was any null-values in the dataset:
+<p align="justify"> We first use the <strong>shape</strong> attribute to determine the size of the dataset. Then, we apply the <strong>info()</strong> method to inspect column data types and identify potential missing values.
+
 ```python
 data_sales.info()
 ```
@@ -74,8 +75,8 @@ data_sales.info()
 </details>
 
 <p align="justify">
-We can see that we have in the dataset: </br>
 
+From the output, we observe that the dataset contains: </br>
 
 - 8 <strong>numerical</strong> columns </br>
 
@@ -83,9 +84,10 @@ We can see that we have in the dataset: </br>
 
 - 1 <strong>boolean</strong> column </br>
 
-Also we can notice that we haven't <strong>NaN values</strong> in the dataset, that can be also confirmed by looking directly into the <strong>isna().sum()</strong> output.
-
 </p>
+
+<p align="justify"> Additionally, we can confirm that the dataset contains <strong>no NaN values</strong>, which is further validated using the <strong>isna().sum()</strong> method. </p>
+
 
 ### 4.2 Null values, outliers and duplicates
 
@@ -102,9 +104,7 @@ data_sales.isna().sum()
 
 </details>
 
-<p align="justify">
-After the confirmation of the absence of <strong>null values</strong> in the dataset, we looked for <strong>outliers</strong> and <strong>duplicates</strong> in the dataset. For the first one, we built histograms with all the numerical columns in the dataset, the advantage of using this method is that allow us quickly to detect outliers in the dataset: 
-</p>
+<p align="justify"> After confirming the absence of missing values, we searched for <strong>outliers</strong> and <strong>duplicate records</strong>. To identify potential outliers, histograms were generated for all numerical variables. This approach allows for a quick visual inspection of abnormal distributions. </p>
 
 ```python
 data_sales.hist(figsize=(12, 8), bins=30)
@@ -116,7 +116,8 @@ data_sales.hist(figsize=(12, 8), bins=30)
 </div>
 <p><strong>Figure 4.</strong> Histograms of numerical columns to look for outliers
 
-Then we looked for duplicates in the dataset: 
+<p align="justify"> We then checked for duplicate rows using the <strong>duplicated().sum()</strong> method. </p>
+
 ```python
 data_sales.duplicated().sum()
 ```
@@ -130,16 +131,11 @@ data_sales.duplicated().sum()
 
 </details>
 
-<p align="justify">
-- If we analyse the histograms, all the numerical features behave inside of the normal patterns, so we don't have any obvious outlier in this dataset nor duplicates. 
-</p>
+<p align="justify"> Based on the histogram analysis and duplicate check, all numerical features fall within reasonable ranges, indicating the absence of obvious outliers or duplicate entries in the dataset. </p>
 
 ### 4.3 Features Correlation
 
-<p align="justify">
-Main goal here is to analyse correlation among features using several kind of graphs, like <strong>heatmaps</strong>, <strong>barcharts</strong> and finally a <strong>linechart</strong> for sales
-evolution over time:
-</p>
+<p align="justify"> The objective of this section is to analyze correlations among numerical features using several visualization techniques, including <strong>heatmaps</strong>, <strong>bar charts</strong>, and a <strong>line chart</strong> to assess sales evolution over time. </p>
 
 ```python
 num_variables_corr = ['Unit_Price', 'Quantity', 'Discount_Amount', 'Customer_Rating', 'Year', 'Month']
@@ -250,11 +246,7 @@ Insights drawn from the graph: </br>
 
 #### 4.4.1 Which cities generate the highest total sales in the Beauty and Fashion categories? 
 
-<p align="justify">
-
-For answering this question first, we are going to filter the data using a query(), selection just the Fashion and Beauty categories and the will use  groupby().sum(), to calculate the total amount of sales in both categories:
-
-</p>
+<p align="justify"> To answer this question, we filtered the dataset to include only the Beauty and Fashion categories. We then grouped the data by city and calculated the total sales amount. </p>
 
 ```python
 city_beauty_fashion = (data_sales.query('Product_Category == "Beauty" or Product_Category == "Fashion"')
@@ -294,30 +286,18 @@ plt.show()
 
 #### 4.4.2 How do discounts affect the quantity of items purchased?
 
-<p align="justify">
-
-In this case, we are going to use a scatterplot to correlate the discount with the unit price, classifing the point using the amount of items sold: 
-
-</p>
+<p align="justify"> A scatter plot was used to visualize the relationship between discount amount and unit price, with points classified by the quantity sold. </p>
 
 <div align="center">
   <img src="Images/question2.png" alt="Screenshot1">
 </div>
 <p><strong>Figure 10.</strong> Influence of discount in amount of items purchased
 
-<p align="justify">
-
-- In the graph is shown that for higher discounts, people are buying more instances of the same product
-
-</p>
+<p align="justify"> - The results indicate that higher discounts are associated with larger quantities purchased, suggesting that discounts play a significant role in increasing sales volume. </p>
 
 #### 4.4.3 What are the most popular payment methods by age group?
 
-<p align="justify">
-
-To answer this question, we are going first of all to create a new column that is the Age_Group, and then we used groupby() to count the amount of customers that have payed with certain payment method:
-
-</p>
+<p align="justify"> An <strong>Age_Group</strong> variable was created to classify customers into Young Adults, Adults, and Seniors. Payment method proportions were then calculated for each group. </p>
 
 ```python
 # Creating Age_Group column
@@ -361,7 +341,7 @@ plt.show()
 
 #### 4.4.4 How does device type influence user engagement, measured by pages viewed and session duration?
 
-In this case, we used two boxchart subplots, in the first one we analyse the influence of the device type with the amount of websited visited, and in the second one also the influence of the divice type but over the time that the customers spent in their sessions:
+<p align="justify"> Two box plots were used to analyze the effect of device type on the number of pages viewed and session duration. </p>
 
 <div align="center">
   <img src="Images/question4.png" alt="Screenshot1">
@@ -378,11 +358,8 @@ In this case, we used two boxchart subplots, in the first one we analyse the inf
 
 #### 4.4.5 Which cities have the lowest average delivery time (most efficient delivery)?
 
-<p align="justify">
+<p align="justify"> We grouped the data by city and calculated the average delivery delay per order. </p>
 
-For this question, we first grouped by City, the aggrupate cities by their counts and the total delivery time in days (sum), afterwards we created a new column Delay_per_order, with the average delay per order: 
-
-</p>
 
 ```python
 
@@ -426,3 +403,5 @@ plt.show()
 </p>
 
 #### 5. Conclusions
+
+<p align="justify"> This exploratory data analysis provided valuable insights into customer behavior, sales performance, and operational efficiency within the e-commerce platform. The dataset was clean, with no missing values, duplicates, or significant outliers, allowing for reliable analysis. </p> <p align="justify"> From a business perspective, the results highlight the importance of discounts in driving higher sales volumes, particularly for higher-priced products. Electronics emerge as the top-performing category, while books contribute the least to total revenue. Seasonal patterns are evident, with sales peaking during the holiday season and declining sharply afterward. </p> <p align="justify"> Customer behavior analysis reveals consistent payment preferences across age groups, with credit cards dominating transactions. Additionally, mobile devices play a crucial role in customer engagement, reinforcing the importance of mobile-optimized platforms. </p> <p align="justify"> Finally, the delivery analysis uncovers disparities in logistics efficiency across cities, suggesting potential areas for improvement in supply chain and distribution strategies. Overall, this EDA provides a strong foundation for further predictive modeling or business optimization efforts. </p>
