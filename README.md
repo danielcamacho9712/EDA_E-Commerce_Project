@@ -19,6 +19,7 @@ This is a e-commerce dataset, from sales across several cities in Turkiye. This 
 <strong>3.4.3-</strong> What are the most popular payment methods by age group? </br>
 <strong>3.4.4-</strong> How does device type influence user engagement, measured by pages viewed and session duration? </br>
 <strong>3.4.5-</strong> Which cities have the lowest average delivery time (most efficient delivery)? </br>
+<strong>4-</strong> Take home notes </br>
 
 
 ## 2. Importing Libraries 
@@ -357,3 +358,71 @@ plt.show()
 - Credit cards are the most commonly used payment method across all age groups, while only about 5% of customers in each age category pay in cash
 
 </p>
+
+#### 4.4.4 How does device type influence user engagement, measured by pages viewed and session duration?
+
+In this case, we used two boxchart subplots, in the first one we analyse the influence of the device type with the amount of websited visited, and in the second one also the influence of the divice type but over the time that the customers spent in their sessions:
+
+<div align="center">
+  <img src="Images/question4.png" alt="Screenshot1">
+</div>
+<p><strong>Figure 12.</strong> Influence of device type pages viewed and session duration
+
+<p align="justify">
+
+- Customers predominantly use mobile devices for online purchases in this store, visiting on average around 9 pages before completing a purchase, with a maximum of 11 pages viewed. </br>
+
+- However, device type does not appear to strongly influence the amount of time users spend online before making a purchase, with a median session duration of 15 minutes across all three device types. </br>
+
+</p>
+
+#### 4.4.5 Which cities have the lowest average delivery time (most efficient delivery)?
+
+<p align="justify">
+
+For this question, we first grouped by City, the aggrupate cities by their counts and the total delivery time in days (sum), afterwards we created a new column Delay_per_order, with the average delay per order: 
+
+</p>
+
+```python
+
+# Calculating average delivery delay per order by city
+rank_delay_df = (
+    data_sales
+    .groupby('City')
+    .agg(
+        Number_of_Orders=('City', 'size'),
+        Total_delivery_time=('Delivery_Time_Days', 'sum')
+    )
+    .assign(Delay_per_order=lambda x: x['Total_delivery_time'] / x['Number_of_Orders'])
+    .sort_values('Delay_per_order', ascending=False)
+)
+
+plt.figure(figsize=(10, 6))
+sns.barplot(data = rank_delay_df,
+            x=rank_delay_df.index, 
+            y='Delay_per_order', 
+            palette='viridis',
+            hue = rank_delay_df.index,
+            legend=False)
+plt.xlabel('City', fontsize=14, labelpad=10)
+plt.ylim([0,8])
+plt.ylabel('Avg Delay per Order (Days)', fontsize=14, labelpad=10)
+plt.title('Average Delivery Delay per Order', fontsize=16)
+plt.show()
+
+```
+
+<div align="center">
+  <img src="Images/question5.png" alt="Screenshot1">
+</div>
+<p><strong>Figure 13.</strong> Average delay in days per order
+
+<p align="justify">
+
+- Konya and Kayseri are among the smallest cities in the dataset, however they exhibit the highest average delivery delays. </br>
+- Overall, the average delivery delay is approximately six days across all cities. </br>
+
+</p>
+
+#### 5. Conclusions
