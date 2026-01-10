@@ -293,7 +293,11 @@ plt.show()
 </div>
 <p><strong>Figure 10.</strong> Influence of discount in amount of items purchased
 
-<p align="justify"> - The results indicate that higher discounts are associated with larger quantities purchased, suggesting that discounts play a significant role in increasing sales volume. </p>
+<p align="justify"> 
+
+- The results indicate that higher discounts are associated with larger quantities purchased, suggesting that discounts play a significant role in increasing sales volume.
+
+ </p>
 
 #### 4.4.3 What are the most popular payment methods by age group?
 
