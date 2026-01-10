@@ -191,7 +191,9 @@ plt.show()
 <p><strong>Figure 7.</strong> Total sales distribution per category
 
 <p align="justify">
+
 - The graph shows that customers spend the most on electronics, while books account for the lowest total sales.
+
 </p>
 
 ```python
