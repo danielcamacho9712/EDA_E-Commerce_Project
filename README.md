@@ -290,3 +290,70 @@ plt.show()
 - Although Adana has a smaller population than Antalya and Konya, it exhibits comparatively higher fashion and beauty spending, indicating potential differences in consumer preferences or income distribution. </br>
 
 </p>
+
+#### 4.4.2 How do discounts affect the quantity of items purchased?
+
+<p align="justify">
+
+In this case, we are going to use a scatterplot to correlate the discount with the unit price, classifing the point using the amount of items sold: 
+
+</p>
+
+<div align="center">
+  <img src="Images/question2.png" alt="Screenshot1">
+</div>
+<p><strong>Figure 10.</strong> Influence of discount in amount of items purchased
+
+<p align="justify">
+
+- In the graph is shown that for higher discounts, people are buying more instances of the same product
+
+</p>
+
+#### 4.4.3 What are the most popular payment methods by age group?
+
+<p align="justify">
+
+To answer this question, we are going first of all to create a new column that is the Age_Group, and then we used groupby() to count the amount of customers that have payed with certain payment method:
+
+</p>
+
+```python
+# Creating Age_Group column
+data_sales['Age_Group'] = data_sales['Age'].apply(lambda x: 'Young Adults' if x < 30 else ('Adults' if x < 60 else 'Senior'))
+
+payment_methods_age = (data_sales.groupby('Age_Group')['Payment_Method']
+                       .value_counts(normalize=True)
+                       .rename('Proportion')
+                       .reset_index())
+payment_methods_age
+
+
+plt.figure(figsize=(10, 8))
+
+sns.barplot(
+    data=payment_methods_age,
+    x='Payment_Method',
+    y='Proportion',
+    hue='Age_Group',
+    palette='mako'
+)
+
+plt.xlabel('Payment Method', fontsize=14, labelpad=10)
+plt.ylabel('Proportion', fontsize=14, labelpad=10)
+plt.title('Proportion of Payment Methods by Age Group', fontsize=16)
+plt.legend(title='Age Group', title_fontsize=12, frameon=True)
+plt.show()
+
+```
+
+<div align="center">
+  <img src="Images/question3.png" alt="Screenshot1">
+</div>
+<p><strong>Figure 11.</strong> Influence of age in payment method selected
+
+<p align="justify">
+
+- Credit cards are the most commonly used payment method across all age groups, while only about 5% of customers in each age category pay in cash
+
+</p>
