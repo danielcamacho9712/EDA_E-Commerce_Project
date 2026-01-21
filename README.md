@@ -22,9 +22,11 @@ This project uses an e-commerce dataset containing sales data from several citie
 <strong>4-</strong> Key takeaways <br>
 
 
+**HELLO**, *hello*
+
 ## 2. Importing Libraries 
 <p align="justify">
-We will be working in this dataset with 3 libraries, **pandas** for tabular data managment, <strong>matplotlib.pyplot</strong> and <strong>seaborn</strong> for visualization:
+We will be working in this dataset with 3 libraries, </strong>pandas</strong> for tabular data managment, <strong>matplotlib.pyplot</strong> and <strong>seaborn</strong> for visualization:
 </p>
 
 ```python
