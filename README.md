@@ -1,4 +1,4 @@
-# Exploratory Data Analysis Project
+# E-commerce Customer and Sales Analysis
 
 You can find the dataset:
 *https://www.kaggle.com/datasets/umuttuygurr/e-commerce-customer-behavior-and-sales-analysis-tr*
